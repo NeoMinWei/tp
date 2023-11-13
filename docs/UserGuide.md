@@ -645,12 +645,14 @@ Example of output:
 Here is your reminder list:
 1. Reminder 
    Type: debt
-   Date: 2023.12.11
+   Date: Dec 11 2023
    Status: Not Done
+   Left Days: 28
 2. Reminder 
    Type: loan
-   Date: 2023.12.18
+   Date: Dec 18 2023
    Status: Not Done
+   Left Days: 35
 ```
 
 ### Add reminder: `addreminder`

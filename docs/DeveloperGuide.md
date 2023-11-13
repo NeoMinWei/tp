@@ -139,6 +139,7 @@ This feature was implemented with the help of three different classes.
 They are namely: Visualizer, Categorizer, VisCommand (Inherits from abstract Command Class)
 
 VisCommand's Role: 
+
 1) Read the parameters of the vis command entered by the user
 - `/t` Reads the type of cashflow that the user wants to visualize (income/expense)
 - `/c` Reads the type of visualization tools the user wants (piechart/barchart)
@@ -211,10 +212,10 @@ The watchlist class keeps a record of the stocks that the user is interested in 
 private HashMap<String, Stock> stocks;
 ```
 
-1. When its method `getLatestWatchListInfo()` is invoked, it calls `getExpiredStocks` to get the list
+1. When its method `getLatestWatchListInfo()` is invoked, it calls `getExpiredStocks()` to get the list
 of stocks that has expired and should be renewed with latest info.
-2. With the list of expired stocks, it calls `fetchFMPStockPrices` which connects to Financial Modeling API to retrieve
-the latest stock prices and calls `extractWatchListInfoFromJSONArray` to update the stocks in the Hashmap 
+2. With the list of expired stocks, it calls `fetchFMPStockPrices()` which connects to Financial Modeling API to retrieve
+the latest stock prices and calls `extractWatchListInfoFromJSONArray()` to update the stocks in the Hashmap 
 with the latest stock data.
 
 ### Stock
@@ -250,11 +251,11 @@ are corrupted.
 
 ### Add Income/Expense Feature
 
-The add income/expense command has 2 compulsory arguments `/t` and `/a` and 1 optional argument `/r`.
+The add income/expense command has 2 compulsory arguments `/t` and `/a` and 2 optional argument `/r` and  `/d`.
 
 Example:
 ```
-add income /a 100 /t salary /r 30
+add income /a 100 /t salary /r 30 /d work
 ```
 Below are the steps that shows the implementation of add income/expense.
 
@@ -266,16 +267,16 @@ addIncome() or addExpense() instantiates an Income or Expense object respectivel
 Example:
 ```
 switch (category) {
-        case INCOME:
-            cashflowList.addIncome(amount, incomeType, recur);
-            break;
-        case EXPENSE:
-            cashflowList.addExpense(amount, expenseType, recur);
-            break;
-        default:
-            ui.showMessage("Unidentified entry.");
-            break;
-        }
+case INCOME:
+    cashflowList.addIncome(amount, incomeType, recur, description);
+    break;
+case EXPENSE:
+    cashflowList.addExpense(amount, expenseType, recur, description);
+    break;
+default:
+    ui.showMessage("Unidentified entry.");
+    break;
+}         
 ```
 #### Step 2
 The instantiated income/expense then updates the overall balance through addIncomeValue() or addExpenseValue().
